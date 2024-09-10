@@ -1,0 +1,18 @@
+[
+  {
+    "remoteName": "dashboard",
+    "remoteEntry": "http://localhost:8080/gateway/mf/dashboard/remoteEntry.json",
+    "exposedModule": "./routes",
+    "displayName": "Dashboard",
+    "routePath": "dashboard",
+    "ngModuleName": "DASHBOARD_ROUTES"
+  },
+  {
+    "remoteName": "user",
+    "remoteEntry": "http://localhost:8080/gateway/mf/user/remoteEntry.json",
+    "exposedModule": "./routes",
+    "displayName": "User",
+    "routePath": "user",
+    "ngModuleName": "USER_ROUTES"
+  }
+]
