@@ -1,5 +1,7 @@
 stages:
   - build
+  - docker_build
+  - deploy
 
 # Указываем образ Docker для сборки с нужной версией Node.js
 image: node:18.19.0 # Указываем версию Node.js
@@ -22,3 +24,26 @@ build_job:
       - dist/ # Сохраняем собранные артефакты
   only:
     - main # Выполняем сборку только при пуше в ветку main
+
+docker_build_job:
+  stage: docker_build
+  tags:
+    - shell
+  dependencies:
+    - build
+  script:
+    # Собираем Docker-образ с использованием Dockerfile из проекта
+    - docker build --network host -t easy-craft-host:latest .
+
+deploy_job:
+  stage: deploy
+  tags:
+    - shell
+  script:
+    # Останавливаем и удаляем существующий контейнер, если он есть
+    - docker-compose down
+    # Разворачиваем контейнеры с помощью docker-compose
+    - echo "Starting deploy with docker-compose"
+    - docker-compose up -d
+  only:
+    - main
