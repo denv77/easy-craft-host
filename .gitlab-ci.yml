@@ -12,6 +12,8 @@ cache:
 # Определяем задачу сборки
 build_job:
   stage: build
+  tags:
+    - docker
   script:
     - npm ci # Устанавливаем зависимости
     - npm run build # Выполняем сборку Angular-приложения
