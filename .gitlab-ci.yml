@@ -1,0 +1,22 @@
+stages:
+  - build
+
+# Указываем образ Docker для сборки с нужной версией Node.js
+image: node:18.19.0 # Указываем версию Node.js
+
+# Кэширование зависимостей для ускорения сборок
+cache:
+  paths:
+    - node_modules/
+
+# Определяем задачу сборки
+build_job:
+  stage: build
+  script:
+    - npm ci # Устанавливаем зависимости
+    - npm run build # Выполняем сборку Angular-приложения
+  artifacts:
+    paths:
+      - dist/ # Сохраняем собранные артефакты
+  only:
+    - main # Выполняем сборку только при пуше в ветку main
