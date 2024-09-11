@@ -6,7 +6,6 @@ services:
     container_name: easy-craft-host
     ports:
       - "127.0.0.1:4200:4200"
-    environment:
-      - JAVA_OPTS=-Xms256m -Xmx512m
+
 
 
