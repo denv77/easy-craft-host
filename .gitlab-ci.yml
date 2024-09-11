@@ -30,7 +30,7 @@ docker_build_job:
   tags:
     - shell
   dependencies:
-    - build
+    - build_job
   script:
     # Собираем Docker-образ с использованием Dockerfile из проекта
     - docker build --network host -t easy-craft-host:latest .
