@@ -5,7 +5,7 @@ FROM nginx:alpine
 COPY dist/easy-craft/ /usr/share/nginx/html
 
 # Настройка Nginx
-COPY nginx.conf /etc/nginx/sites-available/default
+COPY nginx.conf /etc/nginx/conf.d/host.conf
 
 # Открываем порт 4200
 EXPOSE 4200
