@@ -23,4 +23,4 @@ RUN npm install -g http-server
 EXPOSE 4200
 
 # Команда для запуска сервера на порту 4200
-CMD ["http-server", "dist/easy-craft", "-p", "4200", "-c-1"]
+CMD ["http-server", "dist/easy-craft/browser", "-p", "4200", "-c-1"]
