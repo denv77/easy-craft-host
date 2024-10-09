@@ -1,10 +1,14 @@
 import {Router} from "@angular/router";
 import {routes} from "./routes";
+import {manifestService} from './manifest-service';
 
 export const buildDynamicRoutes = (router: Router) => {
-  return () => {
-    router.resetConfig(
-      routes((window as any).MICROFRONTEND_MANIFEST)
-    );
-  };
+    return () => {
+        const manifest = manifestService.getManifest();
+        if (manifest) {
+            router.resetConfig(routes(manifest));
+        } else {
+            console.error('Manifest is not loaded');
+        }
+    }
 }

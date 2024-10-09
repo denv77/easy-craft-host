@@ -1,7 +1,7 @@
 import {loadRemoteModule} from '@angular-architects/native-federation';
 import {Routes} from "@angular/router";
-import {MfConfig} from "./config";
 import {NotFoundComponent} from "../404/404.component";
+import {MfConfig} from './manifest-service';
 
 export function routes(options: MfConfig[]): Routes {
 

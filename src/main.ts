@@ -1,28 +1,23 @@
 import {initFederation} from '@angular-architects/native-federation';
-import {fetchManifest} from "./app/utils/init";
-import {Manifest, MfConfig} from "./app/utils/config";
+import {Manifest, manifestService, MfConfig} from './app/utils/manifest-service';
 
-fetchManifest()
-  .then((config: MfConfig[]) => {
+manifestService.loadManifest()
+    .then((config: MfConfig[]) => {
 
-    (window as any).MICROFRONTEND_MANIFEST = config;
-    // appConfig.providers.push(
-    //   {provide: MANIFEST_TOKEN, useValue: config},
-    // )
-    const manifest: Manifest = {};
+        const manifest: Manifest = {};
 
-    config.forEach(mf => {
-      if (mf.remoteName && mf.remoteEntry) {
-        manifest[mf.remoteName] = mf.remoteEntry
-      }
+        config.forEach(mf => {
+            if (mf.remoteName && mf.remoteEntry) {
+                manifest[mf.remoteName] = mf.remoteEntry;
+            }
+        });
+
+        return manifest;
     })
-
-    return manifest;
-  })
-  .then(m => initFederation(m)
-    .catch(err => console.error(err))
-    .then(_ => import('./bootstrap'))
-    .catch(err => console.error(err))
-  )
+    .then((m: Manifest) => initFederation(m)
+        .catch(err => console.error(err))
+        .then(_ => import('./bootstrap'))
+        .catch(err => console.error(err))
+    );
 
 
