@@ -81,7 +81,8 @@
 							"src/assets"
 						],
 						"styles": [
-							"src/styles.scss"
+							"src/styles.scss",
+              "node_modules/@easy-craft/ui-core/src/lib/styles/styles.scss"
 						],
 						"scripts": []
 					},
