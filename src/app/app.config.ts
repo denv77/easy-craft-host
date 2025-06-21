@@ -25,6 +25,10 @@ export const appConfig: ApplicationConfig = {
             provide: APP_INITIALIZER,
             useFactory: initializeUser,
             multi: true
+        },
+        {
+            provide: LOCALE_ID,
+            useValue: 'ru'
         }
     ]
 };

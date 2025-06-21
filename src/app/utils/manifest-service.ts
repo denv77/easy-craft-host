@@ -43,7 +43,7 @@ class ManifestService {
             this.manifest = await fetchManifest();
             return this.manifest;
         } catch (error) {
-            console.error('Failed to load manifest:', error);
+            console.error(error);
             throw error;
         }
     }
