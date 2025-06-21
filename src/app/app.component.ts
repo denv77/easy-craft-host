@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
             this.menu = manifest.map((mf: MfConfig) => ({
                     title: mf.displayName,
                     link: mf.routePath,
-                    icon: mf.remoteName === 'dashboard' ? 'home-outline' : 'person-outline',
+                    icon: mf.icon,
                     home: mf.remoteName === 'dashboard'
                 }
             ));

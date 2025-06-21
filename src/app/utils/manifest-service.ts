@@ -8,6 +8,7 @@ export type MfConfig = LoadRemoteModuleOptions & {
     displayName: string;
     routePath: string;
     ngModuleName: string;
+    icon: string;
 };
 
 async function fetchManifest(): Promise<MfConfig[]> {
