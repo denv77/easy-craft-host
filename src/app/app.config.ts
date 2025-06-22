@@ -2,9 +2,13 @@ import {APP_INITIALIZER, ApplicationConfig, LOCALE_ID} from '@angular/core';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {provideRouter, Router} from '@angular/router';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import {registerLocaleData} from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
 import {authInterceptor, AuthService, initializeUser} from '@easy-craft/auth';
 import {buildDynamicRoutes} from './utils/build-dynamic-routes';
 import {provideUiCore} from '@easy-craft/ui-core';
+
+registerLocaleData(localeRu);
 
 export const appConfig: ApplicationConfig = {
     providers: [
