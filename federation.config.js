@@ -3,9 +3,8 @@ const {withNativeFederation, shareAll} = require('@angular-architects/native-fed
 module.exports = withNativeFederation({
 
     shared: {
-        ...shareAll({singleton: true, strictVersion: true, requiredVersion: 'auto'}),
+        ...shareAll({singleton: true, strictVersion: true, requiredVersion: 'auto', includeSecondaries: false}),
     },
-
     skip: [
         'rxjs/ajax',
         'rxjs/fetch',
