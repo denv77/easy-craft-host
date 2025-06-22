@@ -11,8 +11,7 @@ module.exports = withNativeFederation({
         'rxjs/fetch',
         'rxjs/testing',
         'rxjs/webSocket',
-        '@angular/common/locales',
-        '@angular/common/locales/global'
+        /^@angular\/common\/locales(\/|$)/
     ]
 
 });
