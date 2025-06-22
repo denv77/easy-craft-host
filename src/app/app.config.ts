@@ -5,7 +5,7 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import {authInterceptor, AuthService, credentialsInterceptor, GATEWAY_URL, initializeUser} from '@easy-craft/auth';
 import {buildDynamicRoutes} from './utils/build-dynamic-routes';
 import {provideUiCore} from '@easy-craft/ui-core';
-import '@angular/common/locales/global/ru';
+// import '@angular/common/locales/global/ru';
 
 export const appConfig: ApplicationConfig = {
     providers: [
