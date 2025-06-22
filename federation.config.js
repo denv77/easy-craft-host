@@ -2,15 +2,16 @@ const {withNativeFederation, shareAll} = require('@angular-architects/native-fed
 
 module.exports = withNativeFederation({
 
+    secondaryEntryPoints: 'minimal',
+
     shared: {
-        ...shareAll({singleton: true, strictVersion: true, requiredVersion: 'auto', includeSecondaries: false}),
+        ...shareAll({singleton: true, strictVersion: true, requiredVersion: 'auto'}),
     },
     skip: [
         'rxjs/ajax',
         'rxjs/fetch',
         'rxjs/testing',
-        'rxjs/webSocket',
-        /^@angular\/common\/locales(\/|$)/
+        'rxjs/webSocket'
     ]
 
 });
