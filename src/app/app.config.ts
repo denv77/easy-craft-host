@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, ApplicationConfig} from '@angular/core';
+import {APP_INITIALIZER, ApplicationConfig, LOCALE_ID} from '@angular/core';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {provideRouter, Router} from '@angular/router';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
