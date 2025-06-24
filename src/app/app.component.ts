@@ -9,7 +9,7 @@ import {manifestService, MfConfig} from './utils/manifest-service';
     standalone: true,
     imports: [RouterOutlet, MainLayoutComponent],
     template: `
-        <ec-main-layout [menu]="menu" (onLogoutClick)="logout()"></ec-main-layout>
+        <ec-main-layout [menu]="menu" (onLogoutClick)="logout()" title="Личный кабинет"></ec-main-layout>
     `,
     styles: [],
 })
