@@ -1,10 +1,11 @@
-import {APP_INITIALIZER, ApplicationConfig} from '@angular/core';
+import {APP_INITIALIZER, ApplicationConfig, importProvidersFrom} from '@angular/core';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {provideRouter, Router} from '@angular/router';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {authInterceptor, AuthService, credentialsInterceptor, GATEWAY_URL, initializeUser} from '@easy-craft/auth';
 import {buildDynamicRoutes} from './utils/build-dynamic-routes';
 import {provideUiCore} from '@easy-craft/ui-core';
+import {NbThemeModule} from "@nebular/theme";
 // import '@angular/common/locales/global/ru';
 
 export const appConfig: ApplicationConfig = {
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
         provideHttpClient(
             withInterceptors([authInterceptor, credentialsInterceptor])
         ),
+        importProvidersFrom(NbThemeModule.forRoot({ name: localStorage.getItem('ec-theme') ?? 'dark' })),
         provideUiCore([]),
         provideAnimationsAsync(),
         AuthService,
@@ -21,9 +23,6 @@ export const appConfig: ApplicationConfig = {
             useFactory: buildDynamicRoutes,
             deps: [Router],
             multi: true,
-        },
-        {
-            provide: GATEWAY_URL, useValue: 'https://docker.smartcom.msk.ru:8043',
         },
         {
             provide: APP_INITIALIZER,

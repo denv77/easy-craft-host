@@ -3,6 +3,7 @@ import {RouterOutlet} from '@angular/router';
 import {AuthService} from '@easy-craft/auth';
 import {MainLayoutComponent} from '@easy-craft/ui-core';
 import {manifestService, MfConfig} from './utils/manifest-service';
+import {NbThemeService} from "@nebular/theme";
 
 @Component({
     selector: 'ec-root',
@@ -17,7 +18,10 @@ export class AppComponent implements OnInit {
 
     menu: any[] = [];
 
-    constructor(private _authService: AuthService) {
+    constructor(private _authService: AuthService, private _themeService: NbThemeService  ) {
+        this._themeService.onThemeChange().subscribe(theme => {
+            localStorage.setItem('ec-theme',theme.name);
+        });
     }
 
     ngOnInit() {
