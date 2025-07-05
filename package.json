@@ -19,7 +19,7 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
-    "@easy-craft/auth": "^1.4.0",
+    "@easy-craft/auth": "^1.5.0",
     "@easy-craft/ui-core": "^1.5.0",
     "@nebular/eva-icons": "^13.0.0",
     "@nebular/theme": "^13.0.0",
