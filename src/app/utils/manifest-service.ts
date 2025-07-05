@@ -22,7 +22,7 @@ async function fetchManifest(): Promise<MfConfig[]> {
             if (response.status === 401) {
                 // Если 401, выполняем редирект на SSO
                 const locationHref = window.location.origin;
-                window.location.href = `${locationHref}/oauth2/authorization/oidc-client`;
+                window.location.href = `${locationHref}/oauth2/authorization/bff`;
             } else {
                 throw new Error(`Failed to fetch manifest: ${response.statusText}`);
             }
