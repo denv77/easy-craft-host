@@ -6,6 +6,7 @@ import {authInterceptor, AuthService, credentialsInterceptor, GATEWAY_URL, initi
 import {buildDynamicRoutes} from './utils/build-dynamic-routes';
 import {provideUiCore} from '@easy-craft/ui-core';
 import {NbThemeModule} from "@nebular/theme";
+import { environment } from '../environments/environment';
 // import '@angular/common/locales/global/ru';
 
 export const appConfig: ApplicationConfig = {
@@ -23,6 +24,9 @@ export const appConfig: ApplicationConfig = {
             useFactory: buildDynamicRoutes,
             deps: [Router],
             multi: true,
+        },
+        {
+            provide: GATEWAY_URL, useValue: environment.bffUrl
         },
         {
             provide: APP_INITIALIZER,

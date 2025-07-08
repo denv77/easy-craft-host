@@ -1,4 +1,5 @@
 import {LoadRemoteModuleOptions} from "@angular-architects/native-federation";
+import { environment } from '../../environments/environment';
 
 export declare type Manifest = {
     [key: string]: string;
@@ -12,7 +13,8 @@ export type MfConfig = LoadRemoteModuleOptions & {
 };
 
 async function fetchManifest(): Promise<MfConfig[]> {
-    const bffUrl = `${window.location.origin}/gateway/api/bff`
+    const origin = environment.bffUrl ? environment.bffUrl : window.location.origin
+    const bffUrl = `${origin}/gateway/api/bff`
     try {
         const response = await fetch(`${bffUrl}/manifest`, {
             credentials: 'include',
@@ -21,8 +23,7 @@ async function fetchManifest(): Promise<MfConfig[]> {
         if (!response.ok) {
             if (response.status === 401) {
                 // Если 401, выполняем редирект на SSO
-                const locationHref = window.location.origin;
-                window.location.href = `${locationHref}/oauth2/authorization/bff`;
+                window.location.href = `${origin}/oauth2/authorization/bff`;
             } else {
                 throw new Error(`Failed to fetch manifest: ${response.statusText}`);
             }
