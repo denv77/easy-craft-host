@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {AuthService} from '@easy-craft/auth';
-import {MainLayoutComponent} from '@easy-craft/ui-core';
-import {manifestService, MfConfig} from './utils/manifest-service';
-import {NbThemeService} from "@nebular/theme";
+import { Component, OnInit } from '@angular/core';
+import { MainLayoutComponent } from '@easy-craft/ui-core';
+import { manifestService, MfConfig } from './utils/manifest-service';
+import { NbDialogService, NbThemeService } from "@nebular/theme";
+import { SessionService } from './services/session.service';
+import { SessionWarningComponent } from './components/session-warning/session-warning.component';
 
 @Component({
     selector: 'ec-root',
     standalone: true,
-    imports: [RouterOutlet, MainLayoutComponent],
+    imports: [MainLayoutComponent],
     template: `
         <ec-main-layout [menu]="menu" (onLogoutClick)="logout()" title="Личный кабинет"></ec-main-layout>
     `,
@@ -18,9 +18,14 @@ export class AppComponent implements OnInit {
 
     menu: any[] = [];
 
-    constructor(private _authService: AuthService, private _themeService: NbThemeService  ) {
+    isDialogOpened: boolean = false;
+
+    constructor(private _themeService: NbThemeService,
+                private _sessionService: SessionService,
+                private _dialogService: NbDialogService) {
+
         this._themeService.onThemeChange().subscribe(theme => {
-            localStorage.setItem('ec-theme',theme.name);
+            localStorage.setItem('ec-theme', theme.name);
         });
     }
 
@@ -38,10 +43,36 @@ export class AppComponent implements OnInit {
         } else {
             console.error('Manifest is not loaded');
         }
+
+        this._sessionService.shouldWarn$
+            .subscribe(shouldWarn => {
+                if (shouldWarn && !this.isDialogOpened) {
+                    this.openDialog();
+                }
+            })
+
+    }
+
+    openDialog() {
+        this.isDialogOpened = true;
+        this._dialogService
+            .open(SessionWarningComponent, {
+                closeOnBackdropClick: false,
+                closeOnEsc: false,
+            })
+            .onClose
+            .subscribe(dialogResult => {
+                this.isDialogOpened = false
+                if (dialogResult) {
+                    this._sessionService.refresh();
+                } else {
+                    this._sessionService.logout();
+                }
+            });
     }
 
     logout() {
-        this._authService.logout().subscribe();
+        this._sessionService.logout();
     }
 
 }
